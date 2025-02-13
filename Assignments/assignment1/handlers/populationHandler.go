@@ -80,8 +80,8 @@ func CountryPopulationHandler(w http.ResponseWriter, r *http.Request) {
 
 		//split query parameters
 		if len(queryParams) != 2 {
-			http.Error(w, "Bad query, aborting request", http.StatusBadRequest)
-			log.Println("Bad query, request aborted:")
+			http.Error(w, "Bad request, query must be numbers seperated by a hyphen", http.StatusBadRequest)
+			log.Println("Bad request, query must be numbers seperated by a hyphen")
 			return
 		}
 

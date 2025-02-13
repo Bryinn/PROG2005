@@ -35,13 +35,13 @@ func CountryInfoHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if len(r.PathValue(argName)) < 2 {
-		http.Error(w, "Error reading request. Missing argument or argument too short", http.StatusBadRequest)
-		log.Println(w, "Error reading request.  Missing argument or argument too short", http.StatusBadRequest)
+		http.Error(w, "Error reading request. Missing argument or argument too short. Two letter country code needed", http.StatusBadRequest)
+		log.Println(w, "Error reading request.  Missing argument or argument too short. Two letter country code needed", http.StatusBadRequest)
 		return
 	}
 	if len(r.PathValue(argName)) > 2 {
-		http.Error(w, "Error reading request. Invalid argument", http.StatusBadRequest)
-		log.Println(w, "Error reading request.  Invalid argument", http.StatusBadRequest)
+		http.Error(w, "Error reading request. Invalid argument, argument too log. Two letter country code needed", http.StatusBadRequest)
+		log.Println(w, "Error reading request.  Invalid argument, argument too log. Two letter country code needed", http.StatusBadRequest)
 		return
 	}
 

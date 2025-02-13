@@ -27,7 +27,7 @@ type ApiResponsePopulation struct {
 	Data    ApiPopCountryData `json:"data"`
 }
 
-//data from country api
+// info response struct
 type countryAPIResponse struct {
 	Name       string            `json:"name"`
 	Continents []string          `json:"continents"`
@@ -39,6 +39,7 @@ type countryAPIResponse struct {
 	Cities     []string          `json:"cities"`
 }
 
+//data from country api
 type apiResponseCountry struct {
 	Name struct {
 		Common string `json:"common"`
