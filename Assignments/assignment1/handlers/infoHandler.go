@@ -81,17 +81,21 @@ func CountryInfoHandler(w http.ResponseWriter, r *http.Request) {
 	// Sorts cities in acending order
 	sort.Strings(postResponse.Cities)
 
-	if r.URL.Query().Get(queryName) == "" {
+	str_limit := r.URL.Query().Get(queryName)
+	if str_limit == "" {
+		str_limit = "10"
+	}
+	if str_limit == "0" {
 		country.Cities = postResponse.Cities
 	} else {
-		limit, err := strconv.Atoi(r.URL.Query().Get(queryName))
+		int_limit, err := strconv.Atoi(str_limit)
 		if err != nil {
 			http.Error(w, "Bad request, limit must be a number", http.StatusBadRequest)
 			log.Println(w, "Bad request, limit must be a number", http.StatusBadRequest)
 			return
 		}
 
-		for i := 0; i < limit; i++ {
+		for i := 0; i < int_limit; i++ {
 			country.Cities = append(country.Cities, postResponse.Cities[i])
 		}
 	}

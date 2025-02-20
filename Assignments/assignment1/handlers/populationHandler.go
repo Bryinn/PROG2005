@@ -47,6 +47,9 @@ func CountryPopulationHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Failed to get country information:", err)
 		return
 	}
+	// prepare return object
+	var returnObject populationResponse
+
 	// get population API data
 	var postRequest apiPostRequest
 	postRequest.Country = country.Name
@@ -106,11 +109,19 @@ func CountryPopulationHandler(w http.ResponseWriter, r *http.Request) {
 				tempPopulationArr = append(tempPopulationArr, apiResponse.Data.PopulationData[i])
 			}
 		}
-		apiResponse.Data.PopulationData = tempPopulationArr
+		returnObject.Values = tempPopulationArr
+	} else {
+		returnObject.Values = apiResponse.Data.PopulationData
 	}
 
+	var temp int
+	for i := 0; i < len(returnObject.Values); i++ {
+		temp = temp + returnObject.Values[i].Value
+	}
+	returnObject.Mean = temp / len(returnObject.Values)
+
 	// create response object
-	returnJSON, err := json.Marshal(apiResponse)
+	returnJSON, err := json.Marshal(returnObject)
 	if err != nil {
 		http.Error(w, "Error outputting JSON", http.StatusInternalServerError)
 		log.Println(w, "Error outputting JSON", http.StatusInternalServerError)

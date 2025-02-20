@@ -8,6 +8,12 @@ type StatusResponse struct {
 	Uptime           int64
 }
 
+// population object return data
+type populationResponse struct {
+	Mean   int
+	Values []ApiPopulationData
+}
+
 //Population object return data
 type ApiPopulationData struct {
 	Year  int `json:"year"`
